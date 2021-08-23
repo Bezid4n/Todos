@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-sm-offset-1 col-md-offset-2">
+        <ul class="nav nav-tabs">
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" role="presentation" class="nav-link">
+          <a [routerLink]="['/']">Home</a>
+        </li>
+        <li routerLinkActive="active"  role="presentation" class="nav-link">
+          <a [routerLink]="['/todos']">Todos</a>
+        </li>
+        <li  routerLinkActive="active" role="presentation" class="nav-link">
+          <a [routerLink]="['/login']">Login</a>
+        </li>
+        <!-- <li *ngIf="isLoggedIn" role="presentation" class="nav-link">
+          <a (click)="logout()">Logout</a>
+        </li> -->
+      </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-sm-offset-1 col-md-offset-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

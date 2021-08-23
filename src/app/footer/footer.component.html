@@ -1,0 +1,18 @@
+<footer class="footer">
+  <!-- This should be `0 items left` by default -->
+  <span class="todo-count"><strong>{{ts}}</strong> item left</span>
+  <!-- Remove this if you don't implement routing -->
+  <ul class="filters">
+    <li routerLinkActive="selected">
+      <a [routerLink]="['/todos','all']" (click)="allStatus()" >All</a>
+    </li>
+    <li routerLinkActive="selected">
+      <a [routerLink]="['/todos','active']" (click)="activeStatus()">Active</a>
+    </li>
+    <li routerLinkActive="selected">
+      <a [routerLink]="['/todos','completed']" (click)="completedStatus()">Completed</a>
+    </li>
+  </ul>
+  <!-- Hidden if no completed items are left ↓ -->
+  <button class="clear-completed" (click)="clear()">Clear completed</button>
+</footer>
