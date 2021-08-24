@@ -11,10 +11,13 @@ export class TodoManagerComponent implements OnInit {
   constructor(private todoService:TodoService) { }
 
   ngOnInit(): void {
-    this.todos=this.todoService.todos;
-    this.todoService.todoChanged.subscribe(todos=>{
-      this.todos=todos;
-    })
+    // this.todos=this.todoService.todos;
+    // this.todoService.todoChanged.subscribe(todos=>{
+    //   this.todos=todos;
+    // })
+    this.todoService.getList().subscribe(resp=>{
+      this.todos=resp;
+    });
   }
 
   public todos:TodoList[]=[];
