@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { CommonModule } from '@angular/common';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 
 
@@ -46,7 +47,8 @@ import { CommonModule } from '@angular/common';
       ],
     }),
     FormlyBootstrapModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxUiLoaderModule
 
   ],
   providers: [],

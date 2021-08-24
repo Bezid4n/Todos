@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable} from '@angular/core';
 import {  Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 
 export type TypeStatus= 'all' | 'active' | 'completed';
@@ -47,6 +48,10 @@ itemCount(){
   }
 
   AddList(newTask:TodoList){
+     return this.httpClient.post<TodoList>('http://localhost:3010/Todos',newTask)
+     .pipe(tap(()=>{
+       this.getList();
+     }));
     // this.todos.push({...newTask ,id:Math.random()});
     // this.router.navigate(['/todos','all']);
   }
