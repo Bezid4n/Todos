@@ -48,7 +48,8 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     }),
     FormlyBootstrapModule,
     HttpClientModule,
-    NgxUiLoaderModule
+    NgxUiLoaderModule,
+    ReactiveFormsModule
 
   ],
   providers: [],

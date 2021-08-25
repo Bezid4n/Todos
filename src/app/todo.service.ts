@@ -3,6 +3,7 @@ import { EventEmitter, Injectable} from '@angular/core';
 import {  Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 
 export type TypeStatus= 'all' | 'active' | 'completed';
@@ -38,7 +39,7 @@ itemCount(){
   constructor(private router:Router, private httpClient:HttpClient) { }
 
   getList(){
-    this.httpClient.get<TodoList[]>('http://localhost:3010/Todos')
+    this.httpClient.get<TodoList[]>(environment.apiBase+'Todos')
     .subscribe(resp=>{
       this.todos.next(resp);
     })
@@ -48,7 +49,7 @@ itemCount(){
   }
 
   AddList(newTask:TodoList){
-     return this.httpClient.post<TodoList>('http://localhost:3010/Todos',newTask)
+     return this.httpClient.post<TodoList>(environment.apiBase+'Todos',newTask)
      .pipe(tap(()=>{
        this.getList();
      }));
@@ -57,6 +58,7 @@ itemCount(){
   }
 
   removeTask(id:number,status:boolean){
+
     // this.todos=this.todos.filter(x=> x.id !==id)
     // this.todoChanged.emit(this.todos)
     // if(!status){

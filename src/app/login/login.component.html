@@ -1,4 +1,17 @@
-<form [formGroup]="form">
+<!-- <form [formGroup]="form" (ngSubmit)="onLogin()">
   <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
-  <button type="submit" class="btn btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn btn-primary" >Submit</button>
+</form> -->
+
+<form [formGroup]="form" (ngSubmit)="onLogin()">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" id="email" class="form-control" formControlName="email">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" class="form-control" formControlName="password">
+  </div>
+  <button class="btn btn-primary">Login</button>
 </form>
+

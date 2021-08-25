@@ -45,18 +45,28 @@ export class BodyComponent implements OnInit {
     // this.todoService.todoChanged.subscribe(todos=>{
     //   this.todos=todos;
     // })
-    // this.typeS=this.todoService.typeStatus;
-    // this.activatedRoute.data.subscribe(d =>{
-    //   if(d.status == 'active'){
-    //     this.todos=this.todos.filter(x=> x.status==false)
-    //   }
-    //   else if(d.status == 'completed'){
-    //     this.todos=this.todos.filter(x=> x.status==true)
-    //   }
-    // })
+
     this.todoService.getList().subscribe(resp=>{
       this.todos=resp;
     });
+
+     this.typeS=this.todoService.typeStatus;
+    this.activatedRoute.data.subscribe(d =>{
+      if(d.status == 'active'){
+        // this.todos=this.todos.filter(x=> x.status==false)
+        this.todoService.getList().subscribe(resp=>{
+          this.todos=resp;
+          this.todos=this.todos.filter(x=> x.status==false)
+        });
+      }
+      else if(d.status == 'completed'){
+        // this.todos=this.todos.filter(x=> x.status==true)
+        this.todoService.getList().subscribe(resp=>{
+          this.todos=resp;
+          this.todos=this.todos.filter(x=> x.status==true)
+        });
+      }
+    })
   }
   public todos:TodoList[]=[];
   public typeS:TypeStatus | undefined;
