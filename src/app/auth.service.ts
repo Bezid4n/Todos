@@ -11,7 +11,8 @@ export class AuthService {
 
   constructor(private httpClient:HttpClient) { }
 
-  token= new BehaviorSubject(localStorage.getItem('AppToken'))
+  token= new BehaviorSubject<string>(localStorage.getItem('AppToken') || '');
+
   login(data:{email:string, pass:string}){
     return this.httpClient.post<{token:string}>(environment.apiBase+'auth/login',data)
     .pipe(tap(t =>{
@@ -21,8 +22,7 @@ export class AuthService {
   }
 
   logout(){
-
       localStorage.removeItem('AppToken');
-      this.token.next(null);
+      this.token.next('');
   }
 }

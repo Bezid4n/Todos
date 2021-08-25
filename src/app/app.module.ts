@@ -1,6 +1,6 @@
 import {  NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -17,6 +17,7 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { CommonModule } from '@angular/common';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { InterceptorService } from './interceptor.service';
 
 
 
@@ -52,7 +53,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     ReactiveFormsModule
 
   ],
-  providers: [],
+  providers: [{useClass:InterceptorService, provide:HTTP_INTERCEPTORS, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
