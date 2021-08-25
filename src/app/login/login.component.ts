@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { AuthService } from '../auth.service';
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
   //   }
   // ];
   public form: FormGroup;
-  constructor(private authService:AuthService, private ngxService: NgxUiLoaderService) {
+  constructor(private authService:AuthService, private ngxService: NgxUiLoaderService, private router:Router) {
     this.form = new FormGroup({
       email: new FormControl(),
       password: new FormControl()
@@ -50,7 +51,8 @@ export class LoginComponent implements OnInit {
     this.ngxService.start()
     this.authService.login(this.form.value).subscribe(d=>{
       console.log(d);
-      this.ngxService.stop()
+      this.ngxService.stop();
+      this.router.navigate(['/'])
     })
   }
 

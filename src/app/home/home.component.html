@@ -9,12 +9,12 @@
         <li routerLinkActive="active"  role="presentation" class="nav-link">
           <a [routerLink]="['/todos']">Todos</a>
         </li>
-        <li  routerLinkActive="active" role="presentation" class="nav-link">
+        <li  *ngIf="!isLoggedIn" routerLinkActive="active" role="presentation" class="nav-link">
           <a [routerLink]="['/login']">Login</a>
         </li>
-        <!-- <li *ngIf="isLoggedIn" role="presentation" class="nav-link">
+        <li *ngIf="isLoggedIn" role="presentation" class="nav-link">
           <a (click)="logout()">Logout</a>
-        </li> -->
+        </li>
       </ul>
       </div>
     </div>
