@@ -1,6 +1,8 @@
 
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+
 
 import { TodoList, TodoService, TypeStatus } from '../todo.service';
 
@@ -16,26 +18,33 @@ export class BodyComponent implements OnInit {
 
 
 
-  constructor(private todoService:TodoService, private activatedRoute:ActivatedRoute) { }
+  constructor(private todoService:TodoService, private activatedRoute:ActivatedRoute,
+    private ngxService: NgxUiLoaderService) { }
 
 
 
   remove(id:number,status:boolean){
-    this.todoService.removeTask(id,status);
+    this.ngxService.start()
+    this.todoService.removeTask(id,status).subscribe(()=>{
+      this.ngxService.stop()
+    });
 
   }
-  update(id:number){
-    this.todoService.updateStatus(id)
-
+  update(td:TodoList){
+    this.todoService.updateStatus({id:td.id,title:td.title,flagEdit:td.flagEdit,status:!td.status}).subscribe(()=>{
+      // this.ngxService.stop()
+    });
   }
 
-  edit(id:number){
-    this.todoService.editFlag(id)
-
+  edit(td:TodoList){
+    this.todoService.editFlag(td);
 
   }
-  toggleFlag(titleEdit:string,id:number){
-    this.todoService.updateTitle(id, titleEdit);
+  toggleFlag(td:TodoList){
+    this.ngxService.start()
+    this.todoService.updateTitle(td).subscribe(()=>{
+      this.ngxService.stop()
+    });
 
 
   }
@@ -46,29 +55,32 @@ export class BodyComponent implements OnInit {
     //   this.todos=todos;
     // })
 
-    this.todoService.getList().subscribe(resp=>{
-      this.todos=resp;
-    });
-
-     this.typeS=this.todoService.typeStatus;
+    this.todoService.itemCount();
+    //  this.typeS=this.todoService.typeStatus;
     this.activatedRoute.data.subscribe(d =>{
       if(d.status == 'active'){
         // this.todos=this.todos.filter(x=> x.status==false)
         this.todoService.getList().subscribe(resp=>{
           this.todos=resp;
-          this.todos=this.todos.filter(x=> x.status==false)
+          this.todos=this.todos.filter(x=> x.status==false);
         });
       }
       else if(d.status == 'completed'){
         // this.todos=this.todos.filter(x=> x.status==true)
         this.todoService.getList().subscribe(resp=>{
           this.todos=resp;
-          this.todos=this.todos.filter(x=> x.status==true)
+          this.todos=this.todos.filter(x=> x.status==true);
+        });
+      }
+      else if(d.status == 'all'){
+        // this.todos=this.todos.filter(x=> x.status==true)
+        this.todoService.getList().subscribe(resp=>{
+          this.todos=resp;
         });
       }
     })
   }
   public todos:TodoList[]=[];
-  public typeS:TypeStatus | undefined;
+  // public typeS:TypeStatus | undefined;
 
 }

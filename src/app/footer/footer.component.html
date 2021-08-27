@@ -4,13 +4,13 @@
   <!-- Remove this if you don't implement routing -->
   <ul class="filters">
     <li routerLinkActive="selected">
-      <a [routerLink]="['/todos','all']" (click)="allStatus()" >All</a>
+      <a [routerLink]="['/todos','all']"  >All</a>
     </li>
     <li routerLinkActive="selected">
-      <a [routerLink]="['/todos','active']" (click)="activeStatus()">Active</a>
+      <a [routerLink]="['/todos','active']" >Active</a>
     </li>
     <li routerLinkActive="selected">
-      <a [routerLink]="['/todos','completed']" (click)="completedStatus()">Completed</a>
+      <a [routerLink]="['/todos','completed']" >Completed</a>
     </li>
   </ul>
   <!-- Hidden if no completed items are left ↓ -->

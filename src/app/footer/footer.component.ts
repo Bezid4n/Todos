@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { TodoList, TodoService } from '../todo.service';
 
 @Component({
@@ -8,7 +9,8 @@ import { TodoList, TodoService } from '../todo.service';
 })
 export class FooterComponent  implements OnInit{
 
-  constructor(private todoService:TodoService) { }
+  constructor(private todoService:TodoService,
+    private ngxService: NgxUiLoaderService) { }
 
 
 
@@ -20,22 +22,24 @@ export class FooterComponent  implements OnInit{
     })
   }
 
-allStatus(){
-  this.todoService.allTypeStatus();
-}
+// allStatus(){
+//   this.todoService.allTypeStatus();
+// }
 
-activeStatus(){
-  this.todoService.activeTypeStatus();
-}
+// activeStatus(){
+//   this.todoService.activeTypeStatus();
+// }
 
-completedStatus(){
-  this.todoService.completedTypeStatus();
-}
+// completedStatus(){
+//   this.todoService.completedTypeStatus();
+// }
 
 clear(){
-  this.todoService.clearCompleted();
+  this.ngxService.start()
+  this.todoService.clearCompleted().subscribe(()=>{
+    this.ngxService.stop()
+  })
 }
-
 
 
 

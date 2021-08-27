@@ -7,7 +7,7 @@
           <a [routerLink]="['/']">Home</a>
         </li>
         <li routerLinkActive="active"  role="presentation" class="nav-link">
-          <a [routerLink]="['/todos']">Todos</a>
+          <a [routerLink]="['/todos/all']">Todos</a>
         </li>
         <li  *ngIf="!isLoggedIn" routerLinkActive="active" role="presentation" class="nav-link">
           <a [routerLink]="['/login']">Login</a>
